@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fastapi-pod
+  labels:
+    env: stage
+spec:
+  containers:
+    - name: fastapi
+      image: sdupegui/hello-world-fastapi:dev
+      ports:
+      - containerPort: 80
