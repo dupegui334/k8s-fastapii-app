@@ -1,2 +1,3 @@
+fastapi-cli~=0.0
 fastapi~=0.112
 uvicorn~=0.30
