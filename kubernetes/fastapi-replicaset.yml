@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: fastapi-replicaset
+  labels:
+    env: stage
+spec:
+  template:
+    metadata:
+      name: fastapi-pod
+      labels:
+        env: stage
+        app: helloworld-fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: sdupegui/hello-world-fastapi:dev
+          ports:
+          - containerPort: 80
+  
+  replicas: 4
+  selector:
+    matchLabels:
+      env: stage
+      app: helloworld-fastapi
