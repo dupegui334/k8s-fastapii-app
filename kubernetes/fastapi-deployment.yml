@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  labels:
+    env: stage
+spec:
+  template:
+    metadata:
+      name: fastapi-pod
+      labels:
+        env: stage
+        app: helloworld-fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: sdupegui/hello-world-fastapi:dev-1.0.2
+          ports:
+          - containerPort: 80
+          env:
+          - name: "ENV"
+            value: "dupeguib"
+
+  replicas: 1
+  selector:
+    matchLabels:
+      env: stage
+      app: helloworld-fastapi
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-svc
+spec:
+  selector:
+    env: stage
+    app: helloworld-fastapi
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30001
